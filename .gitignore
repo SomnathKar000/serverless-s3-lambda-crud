@@ -1,0 +1,23 @@
+# Node.js dependencies
+node_modules/
+
+# TypeScript build output
+dist/
+
+# Local development environment files
+.env
+
+# AWS credentials (DO NOT COMMIT YOUR ACTUAL CREDENTIALS)
+.aws/
+aws-exports.js
+
+# IDE and editor specific files
+.vscode/
+.idea/
+
+# macOS specific files
+.DS_Store
+
+# Logs and other build artifacts
+*.log
+*.tgz

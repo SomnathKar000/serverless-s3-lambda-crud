@@ -1,0 +1,22 @@
+{
+  "name": "aws-rds-typescript-crud-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "predeploy": "npm run build",
+    "deploy": "serverless deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1420.0",
+    "serverless-iam-roles-per-function": "^3.2.0"
+  }
+}

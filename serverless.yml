@@ -1,0 +1,28 @@
+service: s3-bucket-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: ap-south-1
+  apiName: ${self:service}
+  memorySize: 128 # in MB
+  timeout: 10 # in seconds
+  environment:
+    FILE_UPLOAD_BUCKET_NAME: ${self:custom.bucketName}
+
+custom:
+  bucketName: s3-bucket-${self:provide.stage}
+
+functions:
+  s3FileUploader:
+    handler: src/api/handlers/uploadFile.handler
+    name: s3-file-uploader
+
+resources:
+  Resources:
+    FileBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+        AccessControl: Private
