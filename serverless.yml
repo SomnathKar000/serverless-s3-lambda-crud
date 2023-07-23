@@ -6,7 +6,7 @@ provider:
   stage: dev
   region: ap-south-1
   apiName: ${self:service}
-  memorySize: 128 # in MB
+  memorySize: 256 # in MB
   timeout: 10 # in seconds
   environment:
     FILE_UPLOAD_BUCKET_NAME: ${self:custom.bucketName}
