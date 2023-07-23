@@ -7,7 +7,7 @@ provider:
   region: ap-south-1
   apiName: ${self:service}
   memorySize: 256 # in MB
-  timeout: 10 # in seconds
+  timeout: 30 # in seconds
   environment:
     FILE_UPLOAD_BUCKET_NAME: ${self:custom.bucketName}
 
@@ -15,9 +15,15 @@ custom:
   bucketName: s3-bucket-${self:provide.stage}
 
 functions:
-  s3FileUploader:
-    handler: src/api/handlers/uploadFile.handler
-    name: s3-file-uploader
+  api:
+    handler: dist/index.handler
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: /{proxy+}
+          method: any
 
 resources:
   Resources:

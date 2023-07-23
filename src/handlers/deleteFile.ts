@@ -3,9 +3,9 @@ import {
   APIGatewayProxyEvent,
   Context,
 } from "aws-lambda";
-import { deleteFileFromS3 } from "../../services/s3Services";
-import { errorHandler } from "../../utils/errorHandler";
-import { successResponse } from "../../utils/responseHandler";
+import { deleteFileFromS3 } from "../services/s3Services";
+import { errorHandler } from "../utils/errorHandler";
+import { successResponse } from "../utils/responseHandler";
 
 export const deleteFileHandler = async (
   event: APIGatewayProxyEvent,

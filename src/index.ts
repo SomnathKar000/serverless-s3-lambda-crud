@@ -3,25 +3,29 @@ import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
   Context,
-  Callback,
 } from "aws-lambda";
-import { routes } from "./api/routes";
+import { uploadFileHandler } from "./handlers/uploadFile";
+import { getFileHandler } from "./handlers/getFile";
+import { deleteFileHandler } from "./handlers/deleteFile";
 
 export const handler: APIGatewayProxyHandler = async (
   event: APIGatewayProxyEvent,
-  context: Context,
-  callback: Callback<APIGatewayProxyResult>
+  context: Context
 ): Promise<APIGatewayProxyResult> => {
   const { httpMethod, resource } = event;
   const routeKey = `${httpMethod}:${resource}`;
 
-  const handler = routes[routeKey];
-  if (handler) {
-    return handler(event, context, callback);
-  } else {
-    return {
-      statusCode: 404,
-      body: JSON.stringify({ message: "Not Found" }),
-    };
+  switch (routeKey) {
+    case "POST:/upload":
+      return uploadFileHandler(event, context);
+    case "GET:/files/{id}":
+      return getFileHandler(event, context);
+    case "DELETE:/delete/{id}":
+      return deleteFileHandler(event, context);
+    default:
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ message: "Not Found" }),
+      };
   }
 };

@@ -3,9 +3,9 @@ import {
   APIGatewayProxyResult,
   Context,
 } from "aws-lambda";
-import { getFileFromS3 } from "../../services/s3Services";
-import { errorHandler } from "../../utils/errorHandler";
-import { successResponse } from "../../utils/responseHandler";
+import { getFileFromS3 } from "../services/s3Services";
+import { errorHandler } from "../utils/errorHandler";
+import { successResponse } from "../utils/responseHandler";
 
 export const getFileHandler = async (
   event: APIGatewayProxyEvent,
