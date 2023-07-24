@@ -11,19 +11,46 @@ provider:
   environment:
     FILE_UPLOAD_BUCKET_NAME: ${self:custom.bucketName}
 
+plugins:
+  - serverless-iam-roles-per-function
+
 custom:
   bucketName: s3-bucket-crud-${self:provider.stage}
 
 functions:
-  api:
-    handler: dist/index.handler
+  s3FileUploader:
+    handler: dist/handlers/uploadFile.handler
+    name: s3-file-uploader
     events:
       - http:
-          path: /
-          method: any
+          path: upload
+          method: POST
+    iamRoleStatements:
+      - Effect: Allow
+        Action: s3:PutObject
+        Resource: arn:aws:s3:::${self:custom.bucketName}/*
+  s3FileDownloader:
+    handler: dist/handlers/downloadFile.handler
+    name: s3-file-downloader
+    events:
       - http:
-          path: /{proxy+}
-          method: any
+          path: files/{id}
+          method: GET
+    iamRoleStatements:
+      - Effect: Allow
+        Action: s3:GetObject
+        Resource: arn:aws:s3:::${self:custom.bucketName}/*
+  s3fileDelete:
+    handler: dist/handlers/deleteFile.handler
+    name: s3-file-delete
+    events:
+      - http:
+          path: delete/{id}
+          method: DELETE
+    iamRoleStatements:
+      - Effect: Allow
+        Action: s3:DeleteObject
+        Resource: arn:aws:s3:::${self:custom.bucketName}/*
 
 resources:
   Resources:
