@@ -15,7 +15,7 @@ plugins:
   - serverless-iam-roles-per-function
 
 custom:
-  bucketName: s3-bucket-new-dev
+  bucketName: s3-bucket-new-dev2
 
 functions:
   s3FileUploader:
