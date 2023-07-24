@@ -23,6 +23,6 @@ export const getFileHandler = async (
     return successResponse({ file, message: "File fetched successfully" });
   } catch (error) {
     console.log(error);
-    return errorHandler(500, "Internal Server Error");
+    return errorHandler(500, "Internal Server Error" + JSON.stringify(error));
   }
 };

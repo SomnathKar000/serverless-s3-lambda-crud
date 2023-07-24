@@ -31,7 +31,6 @@ export const getFileFromS3 = async (fileId: string): Promise<any> => {
   const params = {
     Bucket: bucketName,
     Key: fileId,
-    ContentType: "application/json",
   };
   try {
     const file = await s3.getObject(params).promise();
