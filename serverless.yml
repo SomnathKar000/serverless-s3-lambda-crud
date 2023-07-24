@@ -15,7 +15,7 @@ plugins:
   - serverless-iam-roles-per-function
 
 custom:
-  bucketName: s3-bucket-api-${self:provider.stage}
+  bucketName: s3-bucket-new-${self:provider.stage}
 
 functions:
   s3FileUploader:
