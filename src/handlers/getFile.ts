@@ -20,7 +20,7 @@ export const getFileHandler = async (
     if (!file) {
       return errorHandler(404, "File not found");
     }
-    return successResponse({ ...file, message: "File fetched successfully" });
+    return successResponse({ file, message: "File fetched successfully" });
   } catch (error) {
     console.log(error);
     return errorHandler(500, "Internal Server Error" + JSON.stringify(error));
