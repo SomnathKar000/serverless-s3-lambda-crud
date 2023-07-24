@@ -34,6 +34,7 @@ export const getFileFromS3 = async (fileId: string): Promise<any> => {
   };
   try {
     const file = await s3.getObject(params).promise();
+    console.log(file.Body);
     return JSON.parse(file.Body?.toString() || "");
   } catch (error) {
     console.error("Error fetching file from S3:", error);
