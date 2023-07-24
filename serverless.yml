@@ -19,7 +19,7 @@ custom:
 
 functions:
   s3FileUploader:
-    handler: dist/handlers/uploadFile.handler
+    handler: dist/handlers/uploadFile.uploadFileHandler
     name: s3-file-uploader
     events:
       - http:
@@ -30,7 +30,7 @@ functions:
         Action: s3:PutObject
         Resource: arn:aws:s3:::${self:custom.bucketName}/*
   s3FileDownloader:
-    handler: dist/handlers/getFile.handler
+    handler: dist/handlers/getFile.getFileHandler
     name: s3-file-downloader
     events:
       - http:
@@ -41,7 +41,7 @@ functions:
         Action: s3:GetObject
         Resource: arn:aws:s3:::${self:custom.bucketName}/*
   s3fileDelete:
-    handler: dist/handlers/deleteFile.handler
+    handler: dist/handlers/deleteFile.deleteFileHandler
     name: s3-file-delete
     events:
       - http:
