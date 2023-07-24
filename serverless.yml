@@ -30,7 +30,7 @@ functions:
         Action: s3:PutObject
         Resource: arn:aws:s3:::${self:custom.bucketName}/*
   s3FileDownloader:
-    handler: dist/handlers/downloadFile.handler
+    handler: dist/handlers/getFile.handler
     name: s3-file-downloader
     events:
       - http:
