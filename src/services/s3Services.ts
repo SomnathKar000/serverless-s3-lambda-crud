@@ -9,11 +9,15 @@ export const uploadFileToS3 = async (
   fileContext: any
 ): Promise<string> => {
   const fileId = uuidV4();
+  const fileData = {
+    name: filename,
+    context: fileContext,
+  };
 
   const params = {
     Bucket: bucketName,
     Key: fileId,
-    Body: JSON.stringify(filename, fileContext),
+    Body: JSON.stringify(fileData),
     ContentType: "application/json",
   };
 
@@ -34,8 +38,8 @@ export const getFileFromS3 = async (fileId: string): Promise<any> => {
   };
   try {
     const file = await s3.getObject(params).promise();
-    console.log(file.Body);
-    return JSON.parse(file.Body?.toString() || "");
+    const fileData = JSON.parse(file.Body?.toString() || "");
+    return fileData;
   } catch (error) {
     console.error("Error fetching file from S3:", error);
     throw new Error("Failed to fetch file from S3.");
