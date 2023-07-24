@@ -9,6 +9,7 @@ export const uploadFileToS3 = async (
   fileContext: any
 ): Promise<string> => {
   const fileId = uuidV4();
+
   const fileData = {
     name: filename,
     context: fileContext,
